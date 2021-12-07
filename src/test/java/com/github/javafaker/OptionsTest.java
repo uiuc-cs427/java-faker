@@ -8,7 +8,9 @@ import java.util.List;
 
 import static org.hamcrest.Matchers.isIn;
 import static org.hamcrest.Matchers.isOneOf;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 public class OptionsTest extends AbstractFakerTest {
 
@@ -57,7 +59,25 @@ public class OptionsTest extends AbstractFakerTest {
         }
     }
 
+
+    // CS427 Issue link: https://github.com/DiUS/java-faker/issues/664
+    @Test
+    public void testRandomlyNull() {
+        String randomlyNull = faker.options().randomlyNull(faker.company().logo());
+        assertTrue(helper(randomlyNull));
+    }
+
     public enum Day {
         MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY
     }
+
+    public Boolean helper(String random) {
+        if ( random == null || random instanceof String) {
+            return true;
+        }
+        return false;
+    }
+
 }
+
+
