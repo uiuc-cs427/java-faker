@@ -52,4 +52,18 @@ public class Options {
     public <E> E nextElement(List<E> list) {
         return list.get(faker.random().nextInt(list.size()));
     }
+
+    /**
+     * Returns null if random element from list is null.
+     *
+     * @param foo faker functions that may randomly return null.
+     * @param <E>  The type of the elements in the list.
+     * @return A randomly selected element from the list or null.
+     */
+
+    // CS427 Issue link: https://github.com/DiUS/java-faker/issues/664
+
+    public <E> E randomlyNull(E foo) {
+        return faker.options().option(null, foo);
+    }
 }
